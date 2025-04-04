@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 2: Data Structures & Basic Operations for Malaria Data Analysis</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <button class="sidebar-toggle" id="sidebar-toggle">Menu</button>
+    
+    <div class="sidebar" id="sidebar">
+        <h3>Course Navigation</h3>
+        <ul>
+            <li class="menu-item">
+                <a href="#week2">📅 Week 2: Data Structures</a>
+                <ul class="sub-menu">
+                    <li><a href="#data-structures">Data Structures</a></li>
+                    <li><a href="#indexing">Indexing & Subsetting</a></li>
+                    <li><a href="#basic-functions">Basic Functions</a></li>
+                    <li><a href="#dplyr">Data Cleaning with dplyr</a></li>
+                </ul>
+            </li>
+            <li class="menu-item">
+                <a href="#exercises2">📌 Week 2: Exercises</a>
+                <ul class="sub-menu">
+                    <li><a href="#ex-cleaning">Data Cleaning</a></li>
+                    <li><a href="#ex-dplyr">dplyr Exercises</a></li>
+                    <li><a href="#ex-viz">Visualization Exercises</a></li>
+                    <li><a href="#ex-bonus2">Week 2 Bonus Challenge</a></li>
+                </ul>
+            </li>
+            <li class="menu-item">
+                <a href="#solutions2">📌 Week 2: Solutions</a>
+                <ul class="sub-menu">
+                    <li><a href="#sol-cleaning">Cleaning Solutions</a></li>
+                    <li><a href="#sol-dplyr">dplyr Solutions</a></li>
+                    <li><a href="#sol-viz">Visualization Solutions</a></li>
+                    <li><a href="#sol-bonus2">Bonus Solution</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    
+    <div class="container">
+        <h1 id="week2">📅 Week 2: Data Structures & Basic Operations for Malaria Data Analysis</h1>
+        
+        <p>This week, we will:<br>
+        ✅ <strong>Explore basic data structures</strong>: Vectors, matrices, lists, and data frames<br>
+        ✅ <strong>Learn indexing and subsetting</strong> for malaria data<br>
+        ✅ <strong>Use basic functions</strong>: <code>mean()</code>, <code>sum()</code>, <code>table()</code>, <code>summary()</code><br>
+        ✅ <strong>Clean data with <code>dplyr</code></strong>: <code>filter()</code>, <code>select()</code>, <code>mutate()</code></p>
+        
+        <hr>
+        
+        <h2 id="data-structures">1️⃣ Vectors, Matrices, Lists, and Data Frames</h2>
+        
+        <h3>What are Data Structures?</h3>
+        <p>📌 <strong>Data structures</strong> are how data is organized and stored in R. Understanding these is key to effective data analysis.</p>
+        
+        <h3>Step 1: Vectors</h3>
+        <div class="r-code">
+            <code>
+# Creating a vector of malaria cases per region<br>
+cases_per_region <- c(150, 200, 250, 300)
+            </code>
+        </div>
+        
+        <div class="explanation">
+            <h4>🔍 Explanation:</h4>
+            <p>✔ <code>c()</code> creates a <strong>vector</strong>—a basic data structure in R<br>
+            ✔ <code>cases_per_region</code> stores the number of malaria cases in four different regions</p>
+        </div>
+        
+        <hr>
+        
+        <h3>Step 2: Matrices</h3>
+        <div class="r-code">
+            <code>
+# Creating a matrix of malaria cases (rows = regions, columns = years)<br>
+malaria_matrix <- matrix(c(150, 200, 250, 300, 120, 180, 220, 260), nrow = 2, ncol = 4)
+            </code>
+        </div>
+        
+        <div class="explanation">
+            <h4>🔍 Explanation:</h4>
+            <p>✔ <code>matrix()</code> creates a <strong>matrix</strong> with a specified number of rows (<code>nrow</code>) and columns (<code>ncol</code>)<br>
+            ✔ <code>malaria_matrix</code> holds the malaria case data in a 2x4 format</p>
+        </div>
+        
+        <hr>
+        
+        <h3>Step 3: Lists</h3>
+        <div class="r-code">
+            <code>
+# Creating a list of malaria data<br>
+malaria_list <- list(cases_per_region, malaria_matrix, region = "West")
+            </code>
+        </div>
+        
+        <div class="explanation">
+            <h4>🔍 Explanation:</h4>
+            <p>✔ <code>list()</code> creates a <strong>list</strong>, which can store multiple types of data (vectors, matrices, etc.)<br>
+            ✔ <code>malaria_list</code> contains both the vector, matrix, and a text string "West"</p>
+        </div>
+        
+        <hr>
+        
+        <h3>Step 4: Data Frames</h3>
+        <div class="r-code">
+            <code>
+# Creating a data frame for malaria cases per region<br>
+malaria_df <- data.frame(region = c("West", "East", "North", "South"), cases = cases_per_region)
+            </code>
+        </div>
+        
+        <div class="explanation">
+            <h4>🔍 Explanation:</h4>
+            <p>✔ <code>data.frame()</code> creates a <strong>data frame</strong>, which is used to store tabular data<br>
+            ✔ <code>malaria_df</code> is a data frame where <code>region</code> is a column of text and <code>cases</code> is a column of numbers</p>
+        </div>
+        
+        <hr>
+        
+        <h2 id="indexing">2️⃣ Indexing & Subsetting Malaria Data</h2>
+        
+        <h3>Step 1: Accessing Data in Vectors</h3>
+        <div class="r-code">
+            <code>
+# Accessing the first value in the vector<br>
+cases_per_region[1]
+            </code>
+        </div>
+        
+        <div class="explanation">
+            <h4>🔍 Explanation:</h4>
+            <p>✔ <code>cases_per_region[1]</code> accesses the <strong>first element</strong> of the vector</p>
+        </div>
+        
+        <hr>
+        
+        <h3>Step 2: Accessing Data in Matrices</h3>
+        <div class="r-code">
+            <code>
+# Accessing the element in the 1st row and 2nd column<br>
+malaria_matrix[1, 2]
+            </code>
+        </div>
+        
+        <div class="explanation">
+            <h4>🔍 Explanation:</h4>
+            <p>✔ <code>malaria_matrix[1, 2]</code> accesses the element in the <strong>1st row and 2nd column</strong> of the matrix</p>
+        </div>
+        
+        <hr>
+        
+        <h3>Step 3: Accessing Data in Data Frames</h3>
+        <div class="r-code">
+            <code>
+# Accessing the 'cases' column<br>
+malaria_df$cases
+            </code>
+        </div>
+        
+        <div class="explanation">
+            <h4>🔍 Explanation:</h4>
+            <p>✔ <code>malaria_df$cases</code> accesses the <strong>'cases'</strong> column of the data frame</p>
+        </div>
+        
+        <hr>
+        
+        <h3>Step 4: Subsetting Data with Conditions</h3>
+        <div class="r-code">
+            <code>
+# Subsetting the data to find cases greater than 200<br>
+subset_df <- malaria_df[malaria_df$cases > 200, ]
+            </code>
+        </div>
+        
+        <div class="explanation">
+            <h4>🔍 Explanation:</h4>
+            <p>✔ <code>malaria_df[malaria_df$cases > 200, ]</code> subsets rows where <strong>cases are greater than 200</strong></p>
+        </div>
+        
+        <hr>
+        
+        <h2 id="basic-functions">3️⃣ Basic Functions for Malaria Data Analysis</h2>
+        
+        <h3>Step 1: <code>mean()</code></h3>
+        <div class="r-code">
+            <code>
+# Calculating the mean number of cases<br>
+mean_cases <- mean(malaria_df$cases)
+            </code>
+        </div>
+        
+        <div class="explanation">
+            <h4>🔍 Explanation:</h4>
+            <p>✔ <code>mean()</code> calculates the <strong>average</strong> of the <code>cases</code> column<br>
+            ✔ <code>mean_cases</code> stores the result of the average malaria cases</p>
+        </div>
+        
+        <hr>
+        
+        <h3>Step 2: <code>sum()</code></h3>
+        <div class="r-code">
+            <code>
+# Calculating the total number of malaria cases<br>
+total_cases <- sum(malaria_df$cases)
+            </code>
+        </div>
+        
+        <div class="explanation">
+            <h4>🔍 Explanation:</h4>
+            <p>✔ <code>sum()</code> calculates the <strong>sum</strong> of the <code>cases</code> column<br>
+            ✔ <code>total_cases</code> stores the result of the total malaria cases</p>
+        </div>
+        
+        <hr>
+        
+        <h3>Step 3: <code>table()</code></h3>
+        <div class="r-code">
+            <code>
+# Counting the occurrences of each unique value in the region column<br>
+region_counts <- table(malaria_df$region)
+            </code>
+        </div>
+        
+        <div class="explanation">
+            <h4>🔍 Explanation:</h4>
+            <p>✔ <code>table()</code> counts the <strong>frequency</strong> of each value in the specified column (e.g., <code>region</code>)<br>
+            ✔ <code>region_counts</code> stores the count of malaria cases per region</p>
+        </div>
+        
+        <hr>
+        
+        <h3>Step 4: <code>summary()</code></h3>
+        <div class="r-code">
+            <code>
+# Generating summary statistics of the data frame<br>
+summary_stats <- summary(malaria_df)
+            </code>
+        </div>
+        
+        <div class="explanation">
+            <h4>🔍 Explanation:</h4>
+            <p>✔ <code>summary()</code> generates <strong>summary statistics</strong> for each column (min, max, mean, etc.) in the data frame<br>
+            ✔ <code>summary_stats</code> stores the resulting statistics</p>
+        </div>
+        
+        <hr>
+        
+        <h2 id="dplyr">4️⃣ Data Cleaning with <code>dplyr</code></h2>
+        
+        <h3>Step 1: Installing and Loading <code>dplyr</code></h3>
+        <div class="r-code">
+            <code>
+# Install dplyr package<br>
+install.packages("dplyr")<br>
+<br>
+# Load the dplyr package<br>
+library(dplyr)
+            </code>
+        </div>
+        
+        <div class="explanation">
+            <h4>🔍 Explanation:</h4>
+            <p>✔ <code>install.packages("dplyr")</code> installs the <code>dplyr</code> package, which simplifies data manipulation<br>
+            ✔ <code>library(dplyr)</code> loads the package into the R environment</p>
+        </div>
+        
+        <hr>
+        
+        <h3>Step 2: <code>filter()</code> – Filtering Rows</h3>
+        <div class="r-code">
+            <code>
+# Filter rows where cases are greater than 200<br>
+filtered_df <- filter(malaria_df, cases > 200)
+            </code>
+        </div>
+        
+        <div class="explanation">
+            <h4>🔍 Explanation:</h4>
+            <p>✔ <code>filter()</code> selects <strong>rows</strong> that meet the condition (cases > 200)<br>
+            ✔ <code>filtered_df</code> stores the filtered dataset</p>
+        </div>
+        
+        <hr>
+        
+        <h3>Step 3: <code>select()</code> – Selecting Columns</h3>
+        <div class="r-code">
+            <code>
+# Select only the 'region' and 'cases' columns<br>
+selected_df <- select(malaria_df, region, cases)
+            </code>
+        </div>
+        
+        <div class="explanation">
+            <h4>🔍 Explanation:</h4>
+            <p>✔ <code>select()</code> picks specific <strong>columns</strong> from the data frame<br>
+            ✔ <code>selected_df</code> contains only the <code>region</code> and <code>cases</code> columns</p>
+        </div>
+        
+        <hr>
+        
+        <h3>Step 4: <code>mutate()</code> – Adding/Modifying Columns</h3>
+        <div class="r-code">
+            <code>
+# Create a new column 'cases_per_1000' by dividing cases by 1000<br>
+malaria_df <- mutate(malaria_df, cases_per_1000 = cases / 1000)
+            </code>
+        </div>
+        
+        <div class="explanation">
+            <h4>🔍 Explanation:</h4>
+            <p>✔ <code>mutate()</code> creates or modifies a <strong>column</strong> in the data frame<br>
+            ✔ <code>cases_per_1000</code> is a new column showing cases per 1000 people</p>
+        </div>
+        
+        <hr>
+        
+        <h2>✅ Summary of Week 2</h2>
+        <p>By the end of this week, you should:<br>
+        ✔ <strong>Understand basic R data structures</strong>: vectors, matrices, lists, and data frames<br>
+        ✔ <strong>Know how to index and subset data</strong><br>
+        ✔ <strong>Be able to apply basic functions</strong>: <code>mean()</code>, <code>sum()</code>, <code>table()</code>, <code>summary()</code><br>
+        ✔ <strong>Have learned to clean data with <code>dplyr</code></strong>: <code>filter()</code>, <code>select()</code>, <code>mutate()</code></p>
+        
+        <hr>
+        
+        <h1 id="exercises2">📌 Week 2: Exercises – Data Cleaning and Visualization with R for Malaria Data Analysis</h1>
+        
+        <p>This week's exercises will focus on <strong>data cleaning, outlier detection, and data visualization</strong>. The goal is to prepare the malaria dataset for analysis by handling missing values, outliers, and creating visualizations. Follow along step by step!</p>
+        
+        <hr>
+        
+        <div class="exercise-section">
+            <h2 id="ex-cleaning">1️⃣ Data Cleaning and Preprocessing</h2>
+            
+            <h3>Exercise 1.1: Handle Missing Values</h3>
+            <p>🔹 <strong>You have a dataset called <code>malaria_data</code> with the following columns:</strong><br>
+            - <code>Region</code><br>
+            - <code>Cases</code><br>
+            - <code>Fatalities</code><br>
+            - <code>Recovered</code></p>
+            
+            <p>Some values in the <code>Cases</code> column are missing.</p>
+            
+            <p><strong>Write the R code to:</strong></p>
+            <ol>
+                <li>Find the number of missing values in the <code>Cases</code> column.</li>
+                <li>Replace the missing values with the <strong>mean</strong> of the <code>Cases</code> column.</li>
+            </ol>
+            
+            <hr>
+            
+            <h3>Exercise 1.2: Remove Rows with Missing Data</h3>
+            <p>🔹 <strong>Using the <code>na.omit()</code> function, remove rows with any missing values from the <code>malaria_data</code> dataframe.</strong></p>
+            
+            <p><strong>Write the R code to:</strong></p>
+            <ol>
+                <li>Use <code>na.omit()</code> to remove rows with missing data.</li>
+                <li>Display the cleaned dataframe.</li>
+            </ol>
+            
+            <hr>
+            
+            <h3>Exercise 1.3: Handle Outliers</h3>
+            <p>🔹 <strong>Detect and remove outliers in the <code>Cases</code> column using the Interquartile Range (IQR).</strong></p>
+            <p>The formula for detecting outliers is:</p>
+            <pre>
+Lower bound = Q1 - 1.5 * IQR
+Upper bound = Q3 + 1.5 * IQR</pre>
+            <p>Where <strong>Q1</strong> is the first quartile and <strong>Q3</strong> is the third quartile.</p>
+            
+            <p><strong>Write the R code to:</strong></p>
+            <ol>
+                <li>Calculate Q1, Q3, and IQR for the <code>Cases</code> column.</li>
+                <li>Remove outliers from the <code>Cases</code> column.</li>
+                <li>Display the cleaned dataset.</li>
+            </ol>
+        </div>
+        
+        <div class="exercise-section">
+            <h2 id="ex-dplyr">2️⃣ Data Manipulation with dplyr</h2>
+            
+            <h3>Exercise 2.1: Filter Data by Condition</h3>
+            <p>🔹 <strong>Use the <code>filter()</code> function from <code>dplyr</code> to filter out malaria cases where the number of <code>Cases</code> is less than 500.</strong></p>
+            
+            <p><strong>Write the R code to:</strong></p>
+            <ol>
+                <li>Filter <code>malaria_data</code> to keep rows where <code>Cases > 500</code>.</li>
+                <li>Display the filtered dataset.</li>
+            </ol>
+            
+            <hr>
+            
+            <h3>Exercise 2.2: Arrange Data</h3>
+            <p>🔹 <strong>Use the <code>arrange()</code> function from <code>dplyr</code> to sort the data in descending order based on the <code>Cases</code> column.</strong></p>
+            
+            <p><strong>Write the R code to:</strong></p>
+            <ol>
+                <li>Sort the <code>malaria_data</code> dataframe by <code>Cases</code> in descending order.</li>
+                <li>Display the sorted dataset.</li>
+            </ol>
+            
+            <hr>
+            
+            <h3>Exercise 2.3: Create a New Column</h3>
+            <p>🔹 <strong>Create a new column called <code>FatalityRate</code> that calculates the fatality rate as:</strong></p>
+            <pre>FatalityRate = Fatalities / Cases * 100</pre>
+            
+            <p><strong>Write the R code to:</strong></p>
+            <ol>
+                <li>Add a new column <code>FatalityRate</code> to the <code>malaria_data</code> dataframe.</li>
+                <li>Display the updated dataframe.</li>
+            </ol>
+        </div>
+        
+        <div class="exercise-section">
+            <h2 id="ex-viz">3️⃣ Data Visualization with ggplot2</h2>
+            
+            <h3>Exercise 3.1: Create a Histogram</h3>
+            <p>🔹 <strong>Use the <code>ggplot2</code> package to create a histogram of the <code>Cases</code> column from <code>malaria_data</code>.</strong></p>
+            
+            <p><strong>Write the R code to:</strong></p>
+            <ol>
+                <li>Create a histogram of the <code>Cases</code> column.</li>
+                <li>Customize the plot with a title and axis labels.</li>
+            </ol>
+            
+            <hr>
+            
+            <h3>Exercise 3.2: Create a Scatter Plot</h3>
+            <p>🔹 <strong>Use the <code>ggplot2</code> package to create a scatter plot showing the relationship between <code>Cases</code> and <code>Fatalities</code>.</strong></p>
+            
+            <p><strong>Write the R code to:</strong></p>
+            <ol>
+                <li>Create a scatter plot with <code>Cases</code> on the x-axis and <code>Fatalities</code> on the y-axis.</li>
+                <li>Add a title and axis labels to the plot.</li>
+            </ol>
+            
+            <hr>
+            
+            <h3>Exercise 3.3: Create a Boxplot</h3>
+            <p>🔹 <strong>Use the <code>ggplot2</code> package to create a boxplot to visualize the distribution of <code>Cases</code>.</strong></p>
+            
+            <p><strong>Write the R code to:</strong></p>
+            <ol>
+                <li>Create a boxplot of the <code>Cases</code> column.</li>
+                <li>Add a title to the plot and customize the colors.</li>
+            </ol>
+        </div>
+        
+        <div class="exercise-section">
+            <h2 id="ex-bonus2">4️⃣ Bonus Challenge: Automate Data Cleaning and Visualization</h2>
+            
+            <p>🔹 <strong>Write an R script that:</strong></p>
+            <ol>
+                <li><strong>Asks the user</strong> for a file path of a CSV file containing malaria data.</li>
+                <li><strong>Loads the dataset</strong> into R.</li>
+                <li><strong>Cleans the data</strong> by handling missing values and outliers (use previous steps).</li>
+                <li><strong>Creates visualizations</strong>:
+                    <ul>
+                        <li>A histogram of <code>Cases</code></li>
+                        <li>A scatter plot of <code>Cases</code> vs <code>Fatalities</code></li>
+                    </ul>
+                </li>
+                <li><strong>Saves the cleaned dataset</strong> to a new CSV file.</li>
+            </ol>
+            
+            <p>📌 <strong>Hint:</strong> Use <code>read_csv()</code>, <code>summary()</code>, <code>write_csv()</code>, and the visualization functions you learned earlier.</p>
+        </div>
+        
+        <hr>
+        
+        <h1 id="solutions2">📌 Week 2: Solutions – Data Cleaning and Visualization with R for Malaria Data Analysis</h1>
+        
+        <p>Here are the <strong>solutions</strong> for Week 2 exercises:</p>
+        
+        <hr>
+        
+        <div class="solution-section">
+            <h2 id="sol-cleaning">1️⃣ Data Cleaning and Preprocessing</h2>
+            
+            <h3>Exercise 1.1: Handle Missing Values</h3>
+            <div class="r-code">
+                <code>
+# Find the number of missing values in the 'Cases' column<br>
+missing_values <- sum(is.na(malaria_data$Cases))<br>
+missing_values<br>
+<br>
+# Replace missing values with the mean of the 'Cases' column<br>
+mean_cases <- mean(malaria_data$Cases, na.rm = TRUE)<br>
+malaria_data$Cases[is.na(malaria_data$Cases)] <- mean_cases
+                </code>
+            </div>
+            
+            <div class="explanation">
+                <h4>Explanation:</h4>
+                <p>- <code>is.na()</code> checks for missing values in the <code>Cases</code> column.<br>
+                - <code>mean()</code> calculates the mean of the <code>Cases</code> column, excluding missing values with <code>na.rm = TRUE</code>.<br>
+                - Missing values are replaced with the computed mean.</p>
+            </div>
+            
+            <hr>
+            
+            <h3>Exercise 1.2: Remove Rows with Missing Data</h3>
+            <div class="r-code">
+                <code>
+# Remove rows with any missing values using na.omit()<br>
+malaria_data_cleaned <- na.omit(malaria_data)<br>
+<br>
+# Display the cleaned dataframe<br>
+head(malaria_data_cleaned)
+                </code>
+            </div>
+            
+            <div class="explanation">
+                <h4>Explanation:</h4>
+                <p>- <code>na.omit()</code> removes rows with any missing values in the entire dataframe.</p>
+            </div>
+            
+            <hr>
+            
+            <h3>Exercise 1.3: Handle Outliers</h3>
+            <div class="r-code">
+                <code>
+# Calculate Q1, Q3, and IQR for the 'Cases' column<br>
+Q1 <- quantile(malaria_data$Cases, 0.25, na.rm = TRUE)<br>
+Q3 <- quantile(malaria_data$Cases, 0.75, na.rm = TRUE)<br>
+IQR <- Q3 - Q1<br>
+<br>
+# Calculate the lower and upper bounds for outlier detection<br>
+lower_bound <- Q1 - 1.5 * IQR<br>
+upper_bound <- Q3 + 1.5 * IQR<br>
+<br>
+# Remove outliers from the 'Cases' column<br>
+malaria_data_no_outliers <- malaria_data[malaria_data$Cases >= lower_bound & malaria_data$Cases <= upper_bound, ]<br>
+<br>
+# Display the cleaned dataset<br>
+head(malaria_data_no_outliers)
+                </code>
+            </div>
+            
+            <div class="explanation">
+                <h4>Explanation:</h4>
+                <p>- <code>quantile()</code> computes the first (Q1) and third (Q3) quartiles.<br>
+                - IQR is calculated as the difference between Q3 and Q1.<br>
+                - Outliers are removed based on the lower and upper bounds, defined by 1.5 times the IQR.</p>
+            </div>
+        </div>
+        
+        <div class="solution-section">
+            <h2 id="sol-dplyr">2️⃣ Data Manipulation with dplyr</h2>
+            
+            <h3>Exercise 2.1: Filter Data by Condition</h3>
+            <div class="r-code">
+                <code>
+# Filter the data to keep rows where 'Cases' > 500<br>
+library(dplyr)<br>
+malaria_data_filtered <- filter(malaria_data, Cases > 500)<br>
+<br>
+# Display the filtered dataset<br>
+head(malaria_data_filtered)
+                </code>
+            </div>
+            
+            <div class="explanation">
+                <h4>Explanation:</h4>
+                <p>- <code>filter()</code> from <code>dplyr</code> is used to keep only the rows where <code>Cases > 500</code>.</p>
+            </div>
+            
+            <hr>
+            
+            <h3>Exercise 2.2: Arrange Data</h3>
+            <div class="r-code">
+                <code>
+# Sort the data in descending order based on the 'Cases' column<br>
+malaria_data_sorted <- arrange(malaria_data, desc(Cases))<br>
+<br>
+# Display the sorted dataset<br>
+head(malaria_data_sorted)
+                </code>
+            </div>
+            
+            <div class="explanation">
+                <h4>Explanation:</h4>
+                <p>- <code>arrange()</code> from <code>dplyr</code> is used to sort the data. The <code>desc()</code> function is used to sort in descending order.</p>
+            </div>
+            
+            <hr>
+            
+            <h3>Exercise 2.3: Create a New Column</h3>
+            <div class="r-code">
+                <code>
+# Create a new column 'FatalityRate' in the dataframe<br>
+malaria_data$FatalityRate <- (malaria_data$Fatalities / malaria_data$Cases) * 100<br>
+<br>
+# Display the updated dataframe<br>
+head(malaria_data)
+                </code>
+            </div>
+            
+            <div class="explanation">
+                <h4>Explanation:</h4>
+                <p>- The <code>FatalityRate</code> is calculated by dividing <code>Fatalities</code> by <code>Cases</code> and multiplying by 100.</p>
+            </div>
+        </div>
+        
+        <div class="solution-section">
+            <h2 id="sol-viz">3️⃣ Data Visualization with ggplot2</h2>
+            
+            <h3>Exercise 3.1: Create a Histogram</h3>
+            <div class="r-code">
+                <code>
+
+
+                  
